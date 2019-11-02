@@ -37,19 +37,19 @@ namespace csharp
 
         private string GenerateItemNickname(string itemName)
         {
-            string nameContains = string.Empty;
             var lowerCaseName = itemName.ToLower();
+            string nameContains;
 
-            // see if you can use LINQ for this?
-            foreach (var keyword in itemNameKeywords)
+            try
             {
-                if (lowerCaseName.Contains(keyword.Key))
-                {
-                    nameContains = keyword.Value;
-
-                }
-
+                nameContains = itemNameKeywords.FirstOrDefault(keyword => lowerCaseName.Contains(keyword.Key)).Value.ToString();
+                
             }
+            catch
+            {
+                nameContains = string.Empty;
+            }
+            
             
             switch (nameContains)
             {
