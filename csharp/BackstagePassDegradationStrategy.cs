@@ -6,11 +6,28 @@ using System.Threading.Tasks;
 
 namespace csharp
 {
-    public class BackstagePassDegradationStrategy : IDegradeStrategy
+    public class BackstagePassDegradationStrategy : StandardDegrador, IDegradeStrategy
     {
-        public void Degrade(Item item)
+        public override void Degrade(Item item)
         {
-            item.Quality++;
+
+            if (item.SellIn > 10)
+            {
+                item.Quality++;
+            }
+            else if (item.SellIn > 5)
+            {
+                item.Quality += 2;
+            }
+            else if (item.SellIn <= 5)
+            {
+                item.Quality += 3;
+            }
+            
+            if (item.Quality > 50)
+            {
+                item.Quality = 50;
+            }
         }
     }
 }

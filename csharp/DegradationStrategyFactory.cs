@@ -12,7 +12,8 @@ namespace csharp
         {
             ["Standard"] = new StandardDegrador(),
             ["Backstage"] = new BackstagePassDegradationStrategy(),
-            //["Legendary"] = new LegendaryDegrationStrategy()
+            ["Conjured"] = new ConjuredDegradationStrategy(),
+            ["Legendary"] = new LegendaryDegrationStrategy()
 
         };
 
@@ -20,8 +21,8 @@ namespace csharp
         {
             ["backstage"] = "Backstage",
             ["brie"] = "Backstage",
-            //["legendary"] = "Legendary",
-            //["conjured"] = "Conjured"
+            ["legendary"] = "Legendary",
+            ["conjured"] = "Conjured"
 
         };
 
@@ -56,10 +57,10 @@ namespace csharp
                     return "Backstage";
                 case "Backstage":
                     return "Backstage";
-                //case "Legendary":
-                //    return "Legendary";
-                //case "Conjured":
-                //    return "Conjured";
+                case "Legendary":
+                    return "Legendary";
+                case "Conjured":
+                    return "Conjured";
                 default:
                     return "Standard";
             }

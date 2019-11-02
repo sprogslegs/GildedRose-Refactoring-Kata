@@ -8,7 +8,7 @@ namespace csharp
 {
     public class StandardDegrador : IDegradeStrategy
     {
-        public void Degrade(Item item)
+        public virtual void Degrade(Item item)
         {
             if (item.SellIn < 0)
             {

@@ -80,9 +80,9 @@ namespace GildedRoseTests
                 SellIn = sellIn
             };
             
-            var standardDegrador = new StandardDegrador();
-
-            standardDegrador.Degrade(item);
+            var strategyFactory = new DegradationStrategyFactory();
+            var strategy = strategyFactory.GetDegradeStrategy(item);
+            strategy.Degrade(item);
 
             Assert.Equal(expectedQuality, item.Quality);
         }
@@ -93,13 +93,12 @@ namespace GildedRoseTests
         {
             var item = new Item()
             {
-                Quality = 49,
-                SellIn = 3
+                Quality = 50,
             };
 
-            var standardDegrador = new StandardDegrador();
+            var degrador = new BackstagePassDegradationStrategy();
 
-            standardDegrador.Degrade(item);
+            degrador.Degrade(item);
 
             Assert.Equal(50, item.Quality);
 
@@ -114,9 +113,9 @@ namespace GildedRoseTests
                 Quality = 25
             };
 
-            var standardDegrador = new StandardDegrador();
+            var legendaryDegrador = new LegendaryDegrationStrategy();
 
-            standardDegrador.Degrade(item);
+            legendaryDegrador.Degrade(item);
 
             Assert.Equal(25, item.Quality);
         }
@@ -135,9 +134,9 @@ namespace GildedRoseTests
                 SellIn = sellIn
             };
 
-            var standardDegrador = new StandardDegrador();
+            var conjuredDegrador = new ConjuredDegradationStrategy();
 
-            standardDegrador.Degrade(item);
+            conjuredDegrador.Degrade(item);
 
             Assert.Equal(expectedQuality, item.Quality);
         }
