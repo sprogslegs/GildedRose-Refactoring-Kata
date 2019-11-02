@@ -142,6 +142,21 @@ namespace GildedRoseTests
             Assert.Equal(expectedQuality, item.Quality);
         }
 
+        [Fact]
+        // TODO how can I make this test use a Theory?
+        //[InlineData("Aged Brie")]
+        //[InlineData("Backstage passes to a TAFKAL80ETC concert")]
+        //[InlineData("Generic sword")]
+        public void DegradationStrategyFactoryReturnsCorrectStrategy()
+        {
+            var strategyFactory = new DegradationStrategyFactory();
+            var item = new Item() { Name = "Aged Brie"};
+
+            var strategy = strategyFactory.GetDegradeStrategy(item);
+
+            Assert.IsType<BackstagePassDegradationStrategy>(strategy);
+        }
+
 
     }
 }
