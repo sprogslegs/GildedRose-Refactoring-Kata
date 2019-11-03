@@ -61,18 +61,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApprovalTest.cs" />
-    <Compile Include="BackstagePassDegradationStrategy.cs" />
-    <Compile Include="ConjuredDegradationStrategy.cs" />
-    <Compile Include="DegradationStrategyFactory.cs" />
-    <Compile Include="GildedRose.cs" />
-    <Compile Include="GildedRoseTest.cs" />
-    <Compile Include="IDegradeStrategy.cs" />
-    <Compile Include="Item.cs" />
-    <Compile Include="LegendaryDegrationStrategy.cs" />
+    <Compile Include="Domain\Inventory.cs" />
+    <Compile Include="Source\InventoryUpdater.cs" />
+    <Compile Include="Legacy\ApprovalTest.cs" />
+    <Compile Include="StrategyRepository\BackstagePassDegradationStrategy.cs" />
+    <Compile Include="StrategyRepository\ConjuredDegradationStrategy.cs" />
+    <Compile Include="Source\DegradationStrategyFactory.cs" />
+    <Compile Include="Legacy\GildedRose.cs" />
+    <Compile Include="Legacy\GildedRoseTest.cs" />
+    <Compile Include="StrategyRepository\IDegradeStrategy.cs" />
+    <Compile Include="Domain\Item.cs" />
+    <Compile Include="StrategyRepository\LegendaryDegradationStrategy.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StandardDegrador.cs" />
+    <Compile Include="StrategyRepository\StandardDegrador.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -81,6 +83,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

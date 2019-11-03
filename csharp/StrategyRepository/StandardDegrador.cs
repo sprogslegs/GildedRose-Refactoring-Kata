@@ -1,10 +1,11 @@
-﻿using System;
+﻿using csharp.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace csharp
+namespace csharp.StrategyRepository
 {
     public class StandardDegrador : IDegradeStrategy
     {
@@ -24,6 +25,7 @@ namespace csharp
             {
                 item.Quality = 0;
             }
+
 
         }
     }

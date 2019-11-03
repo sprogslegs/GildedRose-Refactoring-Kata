@@ -1,14 +1,15 @@
-﻿using System;
+﻿using csharp.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace csharp
+namespace csharp.StrategyRepository
 {
-    public class BackstagePassDegradationStrategy : StandardDegrador, IDegradeStrategy
+    public class BackstagePassDegradationStrategy : IDegradeStrategy
     {
-        public override void Degrade(Item item)
+        public void Degrade(Item item)
         {
 
             if (item.SellIn > 10)
@@ -23,11 +24,16 @@ namespace csharp
             {
                 item.Quality += 3;
             }
-            
+            else if (item.SellIn < 0)
+            {
+                item.Quality += 6;
+            }
+
             if (item.Quality > 50)
             {
                 item.Quality = 50;
             }
+
         }
     }
 }

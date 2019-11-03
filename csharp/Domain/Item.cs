@@ -1,4 +1,4 @@
-﻿namespace csharp
+﻿namespace csharp.Domain
 {
     public class Item
     {

@@ -1,10 +1,13 @@
-﻿using System;
+﻿using csharp.Domain;
+using csharp.Source;
+using csharp.StrategyRepository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace csharp
+namespace csharp.Source
 {
     public class DegradationStrategyFactory
     {
@@ -13,7 +16,7 @@ namespace csharp
             ["Standard"] = new StandardDegrador(),
             ["Backstage"] = new BackstagePassDegradationStrategy(),
             ["Conjured"] = new ConjuredDegradationStrategy(),
-            ["Legendary"] = new LegendaryDegrationStrategy()
+            ["Legendary"] = new LegendaryDegradationStrategy()
 
         };
 
@@ -21,7 +24,7 @@ namespace csharp
         {
             ["backstage"] = "Backstage",
             ["brie"] = "Backstage",
-            ["legendary"] = "Legendary",
+            ["sulfuras"] = "Legendary",
             ["conjured"] = "Conjured"
 
         };

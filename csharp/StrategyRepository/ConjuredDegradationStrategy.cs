@@ -1,8 +1,10 @@
-﻿namespace csharp
+﻿using csharp.Domain;
+
+namespace csharp.StrategyRepository
 {
-    public class ConjuredDegradationStrategy : StandardDegrador, IDegradeStrategy
+    public class ConjuredDegradationStrategy : IDegradeStrategy
     {
-        public override void Degrade(Item item)
+        public void Degrade(Item item)
         {
             if (item.SellIn < 0)
             {
@@ -18,6 +20,7 @@
             {
                 item.Quality = 0;
             }
+
         }
     }
 }

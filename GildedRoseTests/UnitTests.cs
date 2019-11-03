@@ -1,5 +1,9 @@
 using csharp;
+using csharp.Domain;
+using csharp.Source;
+using csharp.StrategyRepository;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -113,7 +117,7 @@ namespace GildedRoseTests
                 Quality = 25
             };
 
-            var legendaryDegrador = new LegendaryDegrationStrategy();
+            var legendaryDegrador = new LegendaryDegradationStrategy();
 
             legendaryDegrador.Degrade(item);
 
@@ -146,6 +150,7 @@ namespace GildedRoseTests
         //[InlineData("Aged Brie")]
         //[InlineData("Backstage passes to a TAFKAL80ETC concert")]
         //[InlineData("Generic sword")]
+        //[InlineData("Sulfuras, Hand of Ragnaros")]
         public void DegradationStrategyFactoryReturnsCorrectStrategy()
         {
             var strategyFactory = new DegradationStrategyFactory();
@@ -156,6 +161,86 @@ namespace GildedRoseTests
             Assert.IsType<BackstagePassDegradationStrategy>(strategy);
         }
 
+        [Fact]
+        public void InventoryContainsListOfItems()
+        {
+            var expectedItemList = new List<Item>()
+            {
+                new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
+                new Item {Name = "Aged Brie", SellIn = 2, Quality = 0},
+                new Item {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
+                new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
+                new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = -1, Quality = 80},
+                new Item
+                {
+                    Name = "Backstage passes to a TAFKAL80ETC concert",
+                    SellIn = 15,
+                    Quality = 20
+                },
+                new Item
+                {
+                    Name = "Backstage passes to a TAFKAL80ETC concert",
+                    SellIn = 10,
+                    Quality = 49
+                },
+                new Item
+                {
+                    Name = "Backstage passes to a TAFKAL80ETC concert",
+                    SellIn = 5,
+                    Quality = 49
+                },
+				new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
+
+            };
+
+            var inventory = new Inventory();
+
+            for (int i = 0; i < expectedItemList.Count; i++)
+            {
+                Assert.Equal(expectedItemList[i].Name, inventory.ItemList[i].Name);
+                Assert.Equal(expectedItemList[i].Quality, inventory.ItemList[i].Quality);
+                Assert.Equal(expectedItemList[i].SellIn, inventory.ItemList[i].SellIn);
+            }
+           
+        }
+
+        [Theory]
+        [InlineData(2, 6, 2, 80, 18)]
+        [InlineData(31, 50, 0, 80, 0)]
+        public void InventoryUpdaterUpdatesAllInventoryItemQualityAfterSpecifiedIterations(int frequency, int brieQuality, int conjuredQuality, int legendaryQuality, int standardQuality)
+        {
+            var inventory = new Inventory();
+            var itemList = inventory.ItemList;
+            var inventoryUpdater = new InventoryUpdater();
+
+            inventoryUpdater.UpdateInventoryPeriodically(frequency, itemList);
+
+            Assert.Equal(brieQuality, itemList[1].Quality);
+            Assert.Equal(conjuredQuality, itemList[8].Quality);
+            Assert.Equal(legendaryQuality, itemList[3].Quality);
+            Assert.Equal(standardQuality, itemList[0].Quality);
+
+        }
+
+        [Theory]
+        [InlineData(2, 0, 1, -2, 8)]
+        [InlineData(31, -29, -28, -31, -21)]
+        public void InventoryUpdaterUpdatesAllInventoryItemSellIn(int frequency, int brieSellIn, int conjuredSellIn, int legendarySellIn, int standardSellIn)
+        {
+            var inventory = new Inventory();
+            var itemList = inventory.ItemList;
+            var inventoryUpdater = new InventoryUpdater();
+
+            inventoryUpdater.UpdateInventoryPeriodically(frequency, itemList);
+
+            Assert.Equal(brieSellIn, itemList[1].SellIn);
+            Assert.Equal(conjuredSellIn, itemList[8].SellIn);
+            Assert.Equal(legendarySellIn, itemList[3].SellIn);
+            Assert.Equal(standardSellIn, itemList[0].SellIn);
+
+        }
 
     }
+
+    
 }
